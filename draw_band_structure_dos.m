@@ -42,7 +42,7 @@ text(x_value(1)-x_value(end)/15,0,'E_f')
 axis([kpoint(1,5) kpoint(end,5) y_value(1) y_value(end)])
 title(['Band Structure of ', sys_name, ' Gap is ', num2str(energy_gap), 'eV'])
 screen_size = get(0,'screensize');
-set(gcf, 'Position',screen_size)
+set(gcf, 'Position',0.8*screen_size)
 
 fid = fopen(dos_file, 'rt');
 k = 1;
@@ -96,7 +96,7 @@ else
     sum_dos = cell2mat(textscan(fid,FormatString,s(3),'HeaderLines',6));
     fclose(fid);
     plot(sum_dos(:,2), sum_dos(:,1)-s(4),'LineWidth', 3)
-    sum_dos(:,1) = sum_dos(:,1) - s(4);
+    sum_dos(:,1) = sum_dos(:,1) - s(4)- max(energy(q1(1)-1,:));
     hold on
     sum_dos = sum_dos(sum_dos(:,1)<=0,:);
     patch([sum_dos(:,2);flipud(zeros(size(sum_dos,1),1))],...
