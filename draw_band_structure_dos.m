@@ -23,6 +23,8 @@ h1 = subplot(1,2,1);
 h1_pos = get(h1,'position');
 set(h1,'position',[h1_pos(1)+0.05 h1_pos(2:4)])
 
+energy = energy - max(energy(q1(1)-1,:));
+
 plot(kpoint(:,5), energy(q1(1)-low_lim:q1(1)+up_lim,:))
 x_value = get(gca, 'XTick');
 y_value = get(gca, 'YTick');hold on
@@ -72,10 +74,11 @@ if have_pdos
         p_dos(:,2:end) = p_dos(:,2:end) + temp(:,2:end);
     end
     fclose(fid);
-    p_dos(:,1) = sum_dos(:,1) - s(4);
+    p_dos(:,1) = sum_dos(:,1) - s(4) - max(energy(q1(1)-1,:));
     plot(sum_dos(:,2), p_dos(:,1), 'r','LineWidth', 3);hold on
-    plot(p_dos(:,3)+p_dos(:,5),p_dos(:,1), 'b','LineWidth', 3)
-    plot(p_dos(:,4), p_dos(:,1),  'g','LineWidth', 3);
+    plot(p_dos(:,2), p_dos(:,1), 'm','LineWidth', 3);hold on
+    plot(p_dos(:,3)+p_dos(:,5)+p_dos(:,4),p_dos(:,1), 'b','LineWidth', 3)
+    plot(sum(p_dos(:,6:10),2), p_dos(:,1),  'g','LineWidth', 3);
     x_value = get(gca, 'XTick');
     axis([x_value(1) x_value(end) y_value(1) y_value(end)])
     set(gca,'YTick', [], 'YTickLabel', []);
@@ -85,7 +88,7 @@ if have_pdos
         [sum_dos(:,1);flipud(sum_dos(:,1))],...
         [45 48 52]/255,...
         'FaceA',.2,'EdgeA',0);
-    legend('total','p_x+p_y','p_z')
+    legend('total','s-orbit','p-orbit','d-orbit')
     set(gca,'XTick', [], 'XTickLabel', []);
 else
     fid = fopen(dos_file, 'rt');
