@@ -37,6 +37,7 @@ if length(energy) == 1
         up_lim = floor(n_band/2);
     end
     [hsp, hsp_label, node] = read_high_sym_point(kpoints_file);
+    energy_up = energy_up - max(energy_up(q1(1)-1,:));
     energy_gap = min(energy_up(q1(1),:)) - max(energy_up(q1(1)-1,:));
     figure
     plot_band(kpoint, energy_up(q1(1)-low_lim:q1(1)+up_lim,:), hsp, hsp_label, node, sys_name, energy_gap)
