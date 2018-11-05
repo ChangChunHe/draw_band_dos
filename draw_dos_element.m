@@ -96,3 +96,6 @@ if have_pdos
     end
     title(['DOS of ',sys_name],'fontsize',18)
 end
+yval = get(gca, 'ylim');
+text(0,1.1*yval(1),'E_{fermi}')
+line([0, 0],[yval(1) yval(end)], 'linestyle','--')
