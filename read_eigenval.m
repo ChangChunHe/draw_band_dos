@@ -15,11 +15,11 @@ if spin_type == 1
     fid = fopen(filename, 'rt');
     FormatString=repmat('%f ',1,3);
     numb = cell2mat(textscan(fid,FormatString,1,'HeaderLines',5));
-    engval = zeros(numb(3), numb(2));
+    engval = zeros(numb(3), 2*numb(2));
     for ii = 1:numb(2)
         kpoints(ii,:) = cell2mat(textscan(fid,repmat('%f ', 1, 3),1,'HeaderLines',1));
         sub_eigval = cell2mat(textscan(fid,repmat('%f ', 1, 3),numb(3),'HeaderLines', 1));
-        engval(:,ii) = sub_eigval(:,2);
+        engval(:,2*(ii-1)+1:2*ii) = sub_eigval(:,2:3);
     end
     fclose(fid);
     engval = {engval};
@@ -32,8 +32,8 @@ else
     for ii = 1:numb(2)
         kpoints(ii,:) = cell2mat(textscan(fid,repmat('%f ', 1, 3),1,'HeaderLines',1));
         sub_eigval = cell2mat(textscan(fid,repmat('%f ', 1, 5),numb(3),'HeaderLines', 1));
-        engval_1(:,ii) = sub_eigval(:,2);
-        engval_2(:,ii) = sub_eigval(:,3);
+        engval_1(:,2*(ii-1)+1:2*ii) = sub_eigval(:,[2 4]);
+        engval_2(:,2*(ii-1)+1:2*ii) = sub_eigval(:,[3 5]);
     end
     fclose(fid);
     engval = {engval_1, engval_2};
