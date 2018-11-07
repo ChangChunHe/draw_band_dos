@@ -1,6 +1,6 @@
 function plot_band(kpoint, energy, hsp, hsp_label, node, sys_name, energy_gap)
 plot(kpoint(:,5), energy)
-% x_value = get(gca, 'XTick');
+x_value = get(gca, 'XTick');
 y_value = get(gca, 'YTick');hold on
 set(gca,'XTick', [], 'XTickLabel', []);
 for ii = 1:size(hsp,1)/2
@@ -22,7 +22,7 @@ hsp_label = hsp_label(q);
 
 set(gca, 'XTick', kpts_label,...
     'XTickLabel', hsp_label, 'fontsize', 13)
-
+line([x_value(1) x_value(end)], [0 0],'color','g','linestyle','--');
 % text(x_value(1)-x_value(end)/15,0,'E_f')
 axis([kpoint(1,5) kpoint(end,5) -2 2])
 energy_gap(energy_gap<0) = 0;
