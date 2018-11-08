@@ -35,7 +35,7 @@ if length(energy) == 1
     energy_gap = min(cbm) - max(vbm);
     energy_up = energy_up - max(vbm);
     figure
-    plot_band(kpoint, energy_up(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap)
+    plot_band(kpoint, energy_up(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'k')
 else
     energy_up = energy{1};
     energy_down = energy{2};
@@ -59,9 +59,9 @@ else
     energy_gap = min(cbm_up) - max(vbm_up);
     energy_up = energy_up - max(vbm_up);
     figure
-    plot_band(kpoint, energy_up(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap)
+    plot_band(kpoint, energy_up(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'k')
     energy_gap = min(cbm_down) - max(vbm_down);
     energy_down = energy_down - max(vbm_down);
     figure
-    plot_band(kpoint, energy_down(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap)
+    plot_band(kpoint, energy_down(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'r')
 end
