@@ -10,9 +10,9 @@ function draw_band_structure(eigval_file, pos_file, kpts_file)
 %
 %   Examples:
 %
-%       eigenval_file = 'band/EIGENVAL';
-%       pos_file = 'band/POSCAR';kpoints_file = 'band/KPOINTS';
-%       draw_band_structure(eigenval_file, pos_file, kpoints_file)
+%       eigenval_file = 'ScO/EIGENVAL';
+%       pos_file = 'ScO/POSCAR';kpts_file = 'ScO/KPOINTS';
+%       draw_band_structure(eigval_file, pos_file, kpts_file)
 %
 %
 %   See also draw_band_structure_dos, draw_dos_element, draw_dos_pdos
