@@ -8,11 +8,10 @@ function draw_dos_element(dos_file, pos_file, have_pdos)
 %   Examples:
 %       pos_file = 'FM/POSCAR';dos_file = 'FM/DOSCAR';
 %       draw_dos_element(dos_file, pos_file, true)
-%       axis([-6.5 3.5, -40 40])
+%       axis([-5 3.5, -40 40])
 %
 %
 %   See also  draw_dos_pdos, draw_band_structure, draw_specific_atoms
-
 fid = fopen(dos_file, 'rt');
 k = 1;
 while feof(fid) == 0
@@ -58,7 +57,7 @@ if have_pdos
         
         figure
         hold on
-        
+        sum_dos(:,1) = sum_dos(:,1) - s(4);
         for ik = 1:length(atom)
             element_dos_up(:, ik) = sum(sum(p_dos(:,2:2:19,seq(ik,1):seq(ik,2)),2),3);
             element_dos_down(:, ik) = sum(sum(p_dos(:,3:2:19,seq(ik,1):seq(ik,2)),2),3);
@@ -110,7 +109,6 @@ if have_pdos
         sum_dos(:,1) = sum_dos(:,1) - s(4);
         for ik = 1:length(atom)
             element_dos_up(:, ik) = sum(sum(p_dos(:,2:end,seq(ik,1):seq(ik,2)),2),3);
-            
             color_ = rand(3,1);
             plot(sum_dos(:,1), element_dos_up(:,ik), 'color',color_)
         end
@@ -126,5 +124,5 @@ if have_pdos
     title(['DOS of ',deblank(sys_name)],'fontsize',18)
 end
 yval = get(gca, 'ylim');
-text(s(4),1.1*yval(1),'E_{fermi}')
-line([s(4), s(4)],[yval(1) yval(end)], 'linestyle','--')
+% text(0,1.1*yval(1),'E_{fermi}')
+line([0, 0],[yval(1) yval(end)], 'linestyle','--')
