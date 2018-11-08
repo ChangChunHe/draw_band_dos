@@ -29,7 +29,7 @@ fclose(fid);
 fid = fopen(dos_file, 'rt');
 FormatString=repmat('%f ',1,5);
 sum_dos = cell2mat(textscan(fid,FormatString,s(3),'HeaderLines',6));
-if sum(isnan(sum_dos)) == 0; ispin = 1;else ispin = 0;end
+if sum(sum(isnan(sum_dos))) == 0; ispin = 1;else ispin = 0;end
 fclose(fid);
 if have_pdos
     fid = fopen(dos_file, 'rt');
