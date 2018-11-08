@@ -94,7 +94,7 @@ if have_pdos
         
         h = legend(atom{:},'Total DOS');set(h,'FontSize',18);
     end
-    title(['DOS of ',sys_name],'fontsize',18)
+    title(['DOS of ',deblank(sys_name)],'fontsize',18)
 end
 yval = get(gca, 'ylim');
 text(0,1.1*yval(1),'E_{fermi}')
