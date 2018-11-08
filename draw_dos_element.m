@@ -1,4 +1,18 @@
 function draw_dos_element(dos_file, pos_file)
+%draw DOS of each element
+%   draw_dos_element(dos_file, pos_file)
+%   dos_file:   the path of DOSCAR file
+%   pos_file:   the path of pos file
+%
+%   Examples:
+%       pos_file = 'FM/POSCAR';dos_file = 'FM/DOSCAR';
+%       draw_dos_element(dos_file, pos_file)
+%       axis([-5 3.5, -40 40])
+%
+%
+%   See also  draw_dos_pdos, draw_band_structure, draw_specific_atoms
+
+
 have_pdos = 1;
 fid = fopen(dos_file, 'rt');
 k = 1;
