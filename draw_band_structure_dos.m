@@ -46,7 +46,7 @@ figure
 h1 = subplot(1,2,1);
 h1_pos = get(h1,'position');
 set(h1,'position',[h1_pos(1)+0.05 h1_pos(2:4)])
-plot_band(kpoint, energy(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap)
+plot_band(kpoint, energy(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'k')
 
 screen_size = get(0,'screensize');
 set(gcf, 'Position',[0.8*screen_size(1:2)+100 0.8*screen_size(3:4)])
