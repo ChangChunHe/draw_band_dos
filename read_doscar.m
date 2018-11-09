@@ -42,7 +42,11 @@ if ispin
     end
     fclose(fid);
 end
-n_pdos = length(tmp_pdos);
+if have_pdos
+    n_pdos = length(tmp_pdos);
+else
+    n_pdos = 0;
+end
 p_dos = get_pdos(dos_file, n_pdos, s(3), s1(1), ispin);
 
 function p_dos = get_pdos(dos_file, n_pdos, NEDOS, n_element, ispin)
