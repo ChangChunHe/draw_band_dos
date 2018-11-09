@@ -14,6 +14,9 @@ function draw_dos_element(dos_file, pos_file)
 %   See also  draw_dos_pdos, draw_band_structure, draw_specific_atoms
 
 [sum_dos, p_dos] = read_doscar(dos_file);
+if p_dos == 0
+   error('No PDOS found, LORBIT=11 should be set in INCAR') 
+end
 [atom, num, sys_name] = read_element(pos_file);
 
 fid = fopen(dos_file, 'rt');
