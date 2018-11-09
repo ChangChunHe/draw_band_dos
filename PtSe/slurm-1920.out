@@ -1,0 +1,41 @@
+ running on   12 total cores
+ distrk:  each k-point on   12 cores,    1 groups
+ distr:  one band on    3 cores,    4 groups
+ using from now: INCAR     
+ vasp.5.4.4.18Apr17-6-g9f103f2a35 (build Aug 06 2018 16:10:39) complex          
+  
+ POSCAR found type information on POSCAR  Pt Se
+ POSCAR found :  2 types and       3 ions
+ scaLAPACK will be used
+
+ ----------------------------------------------------------------------------- 
+|                                                                             |
+|  ADVICE TO THIS USER RUNNING 'VASP/VAMP'   (HEAR YOUR MASTER'S VOICE ...):  |
+|                                                                             |
+|      You have a (more or less) 'small supercell' and for smaller cells      |
+|      it is recommended  to use the reciprocal-space projection scheme!      |
+|      The real space optimization is not  efficient for small cells and it   |
+|      is also less accurate ...                                              |
+|      Therefore set LREAL=.FALSE. in the  INCAR file                         |
+|                                                                             |
+ ----------------------------------------------------------------------------- 
+
+ LDA part: xc-table for Pade appr. of Perdew
+ found WAVECAR, reading the header
+  number of k-points has changed, file:    48 present:    60
+  trying to continue reading WAVECAR, but it might fail
+ WARNING: stress and forces are not correct
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ...
+ reading WAVECAR
+ the WAVECAR file was read successfully
+ charge-density read from file: unknown                                 
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1    -0.116037595268E+02   -0.11604E+02   -0.30723E+02  3200   0.183E+02
+DAV:   2    -0.136690834896E+02   -0.20653E+01   -0.20219E+01  2704   0.241E+01
+DAV:   3    -0.137131603962E+02   -0.44077E-01   -0.44045E-01  2536   0.411E+00
+DAV:   4    -0.137157686494E+02   -0.26083E-02   -0.26082E-02  2624   0.958E-01
+DAV:   5    -0.137157852569E+02   -0.16607E-04   -0.16607E-04  1928   0.113E-01
+   1 F= -.13715785E+02 E0= -.13707129E+02  d E =-.173132E-01
+ writing wavefunctions
