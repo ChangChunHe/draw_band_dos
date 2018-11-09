@@ -42,7 +42,6 @@ switch n_pdos
         [~,ind] = min(abs(sum_dos(:,1) - s(4)));
         ind_up = find((sum_dos(:,4)-round(sum_dos(ind,4)))>0);
         ind_down =find((sum_dos(:,5)-round(sum_dos(ind,5)))>0);
-        figure
         hold on
         sum_dos(:,1) = sum_dos(:,1) - s(4);
         for ik = 1:length(atom)
@@ -84,7 +83,6 @@ switch n_pdos
         for ik = 2:length(atom)
             seq(ik,:) = [sum(num(1:ik-1))+1 sum(num(1:ik))];
         end
-        figure
         hold on
         sum_dos(:,1) = sum_dos(:,1) - s(4);
         for ik = 1:length(atom)
