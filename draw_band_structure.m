@@ -46,7 +46,7 @@ else
     vbm_up = energy_up(q_up,1:2:end);
     q_down = find(abs(diff(tmp_mean_occupy_down))>0.8);
     cbm_down = energy_down(q_down+1,1:2:end);
-    vbm_down = energy_down(q_down,1:2:end); 
+    vbm_down = energy_down(q_down,1:2:end);
     [rec_k, sys_name] = read_recip(pos_file);
     sys_name = deblank(sys_name);
     for ii = 2:size(kpoint,1)
