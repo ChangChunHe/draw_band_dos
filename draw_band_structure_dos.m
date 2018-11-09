@@ -88,7 +88,6 @@ switch n_pdos
             color_ = rand(3,1);
             plot(element_dos_up(:,ik), sum_dos(:,1), 'color', color_)
         end
-        ind = sum_dos(:,1) <= 0;
         plot(sum_dos(:,2), sum_dos(:,1), 'r','LineWidth', 2)
         patch([sum_dos(:,2);flipud(zeros(size(sum_dos,1),1))],...
             [sum_dos(:,1);flipud(sum_dos(:,1))],...
@@ -100,7 +99,21 @@ switch n_pdos
         set(h2, 'XTickLabel',[], 'YTicKLabel',[])
         h = legend(atom{:},'Total DOS');set(h,'FontSize',18);
 end
-title(['DOS of ',deblank(sys_name)],'fontsize',18)
-yval = get(gca, 'ylim');
+if p_dos == 0
+    sum_dos(:,1) = sum_dos(:,1) - s(4);
+    plot(sum_dos(:,2), sum_dos(:,1), 'r','LineWidth', 2)
+    patch([sum_dos(:,2);flipud(zeros(size(sum_dos,1),1))],...
+        [sum_dos(:,1);flipud(sum_dos(:,1))],...
+        [45 48 52]/255,...
+        'FaceA',.2,'EdgeA',0);
+    yval = get(h1,'Ytick');
+    xval = get(h2,'Xtick');
+    axis([xval(1) xval(end) yval(1) yval(end)])
+    set(h2, 'XTickLabel',[], 'YTicKLabel',[])
+    legend('Total DOS');
+end
+
+title(['DOS of ',deblank(sys_name)])
+% yval = get(gca, 'ylim');
 % text(0,0,'E_{fermi}')
-line([0, 0],[yval(1) yval(end)], 'linestyle','--')
+% line([0, 0],[yval(1) yval(end)], 'linestyle','--')
