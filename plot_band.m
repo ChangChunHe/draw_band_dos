@@ -24,6 +24,6 @@ set(gca, 'XTick', kpts_label,...
     'XTickLabel', hsp_label, 'fontsize', 13)
 line([x_value(1) x_value(end)], [0 0],'color','g','linestyle','--');
 % text(x_value(1)-x_value(end)/15,0,'E_f')
-axis([kpoint(1,5) kpoint(end,5) -2 2])
+axis([kpoint(1,5) kpoint(end,5) -4 4])
 energy_gap(energy_gap<0) = 0;
 title(['Band Structure of ', sys_name, ' Gap is ', num2str(energy_gap), 'eV'])
