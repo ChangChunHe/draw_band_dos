@@ -1,4 +1,4 @@
-% function draw_band_structure_dos(eigval_file, dos_file, pos_file, kpts_file, have_pdos)
+function draw_band_structure_dos(eigval_file, dos_file, pos_file, kpts_file)
 %draw band structure and dos of a system, except for magnetism system
 %   draw_band_structure_dos(eigval_file, dos_file, pos_file, kpts_file, have_pdos)
 %   eigval_file: the path of EIGENVAL file
@@ -17,20 +17,10 @@
 %       dos_file = fullfile(pat, 'DOSCAR');
 %       pos_file = fullfile(pat, 'POSCAR');
 %       kpts_file = fullfile(pat, 'KPOINTS');
-%       draw_band_structure_dos(eigval_file, dos_file, pos_file, kpts_file, have_pdos)
+%       draw_band_structure_dos(eigval_file, dos_file, pos_file, kpts_file)
 %
 %
 %   See also draw_band_structure, draw_dos_element, draw_dos_pdos
-clear
-clc
-
-pat = 'band';
-have_pdos = true;
-eigval_file = fullfile(pat, 'EIGENVAL');
-dos_file = fullfile(pat, 'DOSCAR');
-pos_file = fullfile(pat, 'POSCAR');
-kpts_file = fullfile(pat, 'KPOINTS');
-
 
 [energy, kpoint] = read_eigenval(eigval_file);
 if length(energy) > 1;
@@ -107,9 +97,10 @@ switch n_pdos
         yval = get(h1,'Ytick');
         xval = get(h2,'Xtick');
         axis([xval(1) xval(end) yval(1) yval(end)])
+        set(h2, 'XTickLabel',[], 'YTicKLabel',[])
         h = legend(atom{:},'Total DOS');set(h,'FontSize',18);
 end
 title(['DOS of ',deblank(sys_name)],'fontsize',18)
 yval = get(gca, 'ylim');
-text(0,0,'E_{fermi}')
+% text(0,0,'E_{fermi}')
 line([0, 0],[yval(1) yval(end)], 'linestyle','--')
