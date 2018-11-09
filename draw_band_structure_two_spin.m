@@ -10,7 +10,7 @@ function draw_band_structure_two_spin(eigval_file, pos_file, kpts_file)
 %
 %   Examples:
 %
-%       eigenval_file = 'FM/EIGENVAL';
+%       eigval_file = 'FM/EIGENVAL';
 %       pos_file = 'FM/POSCAR';kpts_file = 'FM/KPOINTS';
 %       draw_band_structure_two_spin(eigval_file, pos_file, kpts_file)
 %
