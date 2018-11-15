@@ -36,7 +36,7 @@ kpoint(:,5) = cumsum(kpoint(:,5));
 tmp_occupy = energy(:,2:2:end);
 tmp_mean_occupy_up = mean(tmp_occupy,2);
 
-q_up = find(abs(diff(tmp_mean_occupy_up))>0.8);
+q_up = find(abs(diff(tmp_mean_occupy_up))>0.4);
 cbm_up = energy(q_up+1,1:2:end);
 vbm_up = energy(q_up,1:2:end);
 
@@ -102,8 +102,9 @@ switch n_pdos
 end
 if p_dos == 0
     sum_dos(:,1) = sum_dos(:,1) - s(4);
-    ind = sum_dos(:,1) < 0;sum_dos = sum_dos(ind,:);
+    
     plot(sum_dos(:,2), sum_dos(:,1), 'r','LineWidth', 2)
+    ind = sum_dos(:,1) < 0;sum_dos = sum_dos(ind,:);
     patch([sum_dos(:,2);flipud(zeros(size(sum_dos,1),1))],...
         [sum_dos(:,1);flipud(sum_dos(:,1))],...
         [45 48 52]/255,...
