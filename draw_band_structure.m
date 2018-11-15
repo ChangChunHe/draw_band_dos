@@ -26,14 +26,24 @@ if length(energy) == 1
     kpoint(:,5) = cumsum(kpoint(:,4));
     tmp_occupy = energy_up(:,2:2:end);
     tmp_mean_occupy = mean(tmp_occupy,2);
-    q1 = find(abs(tmp_mean_occupy - 1)<0.1);
-    cbm = energy_up(q1(end)+1,1:2:end);
-    vbm = energy_up(q1(end),1:2:end);
+    
+    
+    
+    q_up = find(abs(diff(tmp_mean_occupy))>0.4);
+    cbm_up = energy_up(q_up+1,1:2:end);
+    vbm_up = energy_up(q_up,1:2:end);
+    
+    energy_gap = min(cbm_up) - max(vbm_up);
+    energy = energy_up - max(vbm_up);
+    
+    
+    
+    
     [hsp, hsp_label, node] = read_high_sym_point(kpts_file);
-    energy_gap = min(cbm) - max(vbm);
-    energy_up = energy_up - max(vbm);
+    
+    
     figure
-    plot_band(kpoint, energy_up(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'k')
+    plot_band(kpoint, energy(:,1:2:end), hsp, hsp_label, node, sys_name, energy_gap,'k')
 else
     energy_up = energy{1};
     energy_down = energy{2};
