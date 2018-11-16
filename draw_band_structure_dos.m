@@ -116,7 +116,7 @@ if p_dos == 0
     set(h2, 'XTickLabel',[], 'YTicKLabel',[])
     legend('Total DOS');
 end
-title(['DOS of ',deblank(sys_name)])
+title(['DOS of ',deblank(sys_name)],'fontsize',14)
 % yval = get(gca, 'ylim');
 % text(0,0,'E_{fermi}')
 % line([0, 0],[yval(1) yval(end)], 'linestyle','--')
