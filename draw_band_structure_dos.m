@@ -103,10 +103,8 @@ switch n_pdos
 end
 if p_dos == 0
     sum_dos(:,1) = sum_dos(:,1) - zero_point;
-    
     plot(sum_dos(:,2), sum_dos(:,1), 'r','LineWidth', 2)
-    ind = find(sum_dos(:,1) < 0);
-    
+    ind = sum_dos(:,1) < 0;
     sum_dos = sum_dos(ind,:);
     patch([sum_dos(:,2);flipud(zeros(size(sum_dos,1),1))],...
         [sum_dos(:,1);flipud(sum_dos(:,1))],...
