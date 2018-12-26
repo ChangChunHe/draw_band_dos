@@ -16,6 +16,7 @@ while feof(fid) == 0
     end
     k = k +1;
 end
+fclose(fid);
 temp_str = str2num(temp_str{1});
 if isempty(select_flag); headline = 8;else headline = 9;end
 
