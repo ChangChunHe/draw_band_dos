@@ -1,63 +1,32 @@
 function [C, S, atom] = read_poscar(filename)
 fid = fopen(filename, 'rt');
-C = cell2mat(textscan(fid, '%f %f %f', 3, 'Headerlines',2));
-fclose(fid);
-fid = fopen(filename, 'rt');
-k = 1;
-while feof(fid) == 0
-    tline = fgetl(fid);
-    if k == 7
-        temp_str=regexp(tline,'(\d\s*)*','match'); %cell
-    elseif k == 8
-        select_flag=regexp(tline,'elective','match'); %cell
-        break
-    elseif k == 9
-        
-    end
-    k = k +1;
+latt = textscan(fid, '%f%[^\n\r]', 1, 'Headerlines',1);
+C = cell2mat(textscan(fid, '%f %f %f', 3, 'Headerlines',1))*latt{1};
+atom_ele = textscan(fid,'%s',1,'delimiter','\n', 'headerlines',1);
+atom_ele = strsplit(deblank(atom_ele{1}{1}));
+atom_num = textscan(fid,'%s',1,'delimiter','\n');
+atom_num = strsplit(atom_num{1}{1});
+sum_atom = 0;for ii = 1:length(atom_num);sum_atom = sum_atom+str2num(atom_num{ii});end
+
+next_line = textscan(fid,'%s',1,'delimiter','\n');
+if isempty(strfind(lower(next_line{1}{1}), 'sele'))
+    select_flag = false;
+else
+    select_flag = true;
 end
 fclose(fid);
-temp_str = str2num(temp_str{1});
-if isempty(select_flag); headline = 8;else headline = 9;end
-
 fid = fopen(filename,'rt');
-S = zeros(sum(temp_str),3);
-iter = 1;
-while feof(fid) == 0
-    tline = fgetl(fid);
-    if iter > headline
-        t = regexp(tline,'[+-]?\d+\.?\d*', 'match');
-        S(iter-headline,:) = [str2double(t{1}) str2double(t{2}) str2double(t{3})];
-        
-    end
-    iter = iter + 1;
-    if iter > sum(temp_str)+headline
-        break
-    end
-end
-
-fclose(fid);
-
-
-fid = fopen(filename);
-kk = 1;
-while feof(fid) == 0
-    tline = fgetl(fid);
-    if kk == k-1
-        a= regexp(tline,'\w*','match'); %cell
-    end
-    kk = kk +1;
+if select_flag
+    S = textscan(fid, '%f%f%f%[^\n\r]', sum_atom, 'Headerlines',9);
+    S = [S{1} S{2} S{3}];
+else
+    S = textscan(fid, '%f%f%f%[^\n\r]', sum_atom, 'Headerlines',8);
+    S = [S{1} S{2} S{3}];
+    
 end
 fclose(fid);
-atom = [];
-if length(a) ~= length(temp_str)
-    error('Atom species are not consistent to atom numbers')
+atom = cell(2,length(atom_ele));
+for ii = 1:length(atom_ele)
+   atom{1,ii} = atom_ele{ii};
+   atom{2,ii} = atom_num{ii};
 end
-for ii = 1:length(a)
-    atom = [atom repmat([a{ii}, ' '],1, temp_str(ii))];
-end
-
-
-
-
-
