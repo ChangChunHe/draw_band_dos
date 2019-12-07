@@ -35,7 +35,7 @@ end
 fclose(fid);
 n_pdos = size(p_dos,2);
 switch n_pdos
-    case 19
+    case {19,33}
         element_dos_up = zeros(s(3), length(atom));
         element_dos_down = zeros(s(3), length(atom));
         seq = zeros(length(atom),2);seq(1,:) = [1 num(1)];
@@ -48,8 +48,8 @@ switch n_pdos
         hold on
         sum_dos(:,1) = sum_dos(:,1) - s(4);
         for ik = 1:length(atom)
-            element_dos_up(:, ik) = sum(sum(p_dos(:,2:2:19,seq(ik,1):seq(ik,2)),2),3);
-            element_dos_down(:, ik) = sum(sum(p_dos(:,3:2:19,seq(ik,1):seq(ik,2)),2),3);
+            element_dos_up(:, ik) = sum(sum(p_dos(:,2:2:n_pdos,seq(ik,1):seq(ik,2)),2),3);
+            element_dos_down(:, ik) = sum(sum(p_dos(:,3:2:n_pdos,seq(ik,1):seq(ik,2)),2),3);
             color_ = rand(3,1);
             plot(sum_dos(:,1), -element_dos_down(:,ik),'color', color_);
             plot(sum_dos(:,1), element_dos_up(:,ik), 'color',color_)

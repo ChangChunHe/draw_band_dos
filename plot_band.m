@@ -1,4 +1,4 @@
-function plot_band(kpoint, energy, hsp, hsp_label, node, sys_name, energy_gap,color)
+function plot_band(kpoint, energy, hsp, hsp_label, node, sys_name, fermi, color)
 plot(kpoint(:,5), energy,color)
 x_value = get(gca, 'XTick');
 y_value = get(gca, 'YTick');hold on
@@ -22,8 +22,8 @@ hsp_label = hsp_label(q);
 
 set(gca, 'XTick', kpts_label,...
     'XTickLabel', hsp_label, 'fontsize', 13)
-line([x_value(1) x_value(end)], [0 0],'color','g','linestyle','--');
+line([x_value(1) x_value(end)], [fermi fermi],'color','g','linestyle','--');
 % text(x_value(1)-x_value(end)/15,0,'E_f')
-axis([kpoint(1,5) kpoint(end,5) -4 4])
-energy_gap(energy_gap<0) = 0;
-title(['Band Structure of ', sys_name, ' Gap is ', num2str(energy_gap), 'eV'])
+axis([kpoint(1,5) kpoint(end,5) fermi-4 fermi+4])
+% energy_gap(energy_gap<0) = 0;
+title(['Band Structure of ', sys_name])
